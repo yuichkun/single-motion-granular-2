@@ -2,7 +2,8 @@
 </script>
 
 <main>
-  <button>start</button>
+  <h1>single motion granular 2</h1>
+  <button>play</button>
 </main>
 
 <style>
