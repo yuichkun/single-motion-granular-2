@@ -7,6 +7,15 @@
   export let context: AudioContext;
   export let device: Device;
 
+  let position = { x: 0, y: 0 };
+
+  function updatePos(pos: number) {
+    device.parametersById.get("pos").value = pos;
+  }
+  function updatePitch(pitch: number) {
+    device.parametersById.get("pitch").value = pitch;
+  }
+
   function enableGranular() {
     device.parametersById.get("play").value = 1;
   }
@@ -24,7 +33,20 @@
 <div>グラニュラーだよ</div>
 
 <div id="dragAreaContainer">
-  <div id="dragArea" use:draggable={{ bounds: "parent" }} />
+  <div
+    id="dragArea"
+    use:draggable={{
+      bounds: "parent",
+      position,
+      onDrag: ({ offsetX, offsetY }) => {
+        position = { x: offsetX, y: offsetY };
+        const pos = offsetX / 375;
+        const pitch = offsetY / 375;
+        updatePos(pos);
+        updatePitch(1 - pitch);
+      },
+    }}
+  />
 </div>
 <button on:click={enableGranular}>有効化</button>
 <button on:click={disableGranular}>無効化</button>
