@@ -19,6 +19,7 @@
     "vite": "^4.1.0"
   },
   "dependencies": {
+    "@neodrag/svelte": "2.0.3",
     "@rnbo/js": "1.0.1"
   }
 }
